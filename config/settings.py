@@ -22,15 +22,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # third-party apps
-    'rest_framework',
-    'rest_framework_simplejwt',
-    'django_filters',
-
-    # local apps
-    "core",
-    "apps.users.apps.UsersConfig",
+    "rest_framework",
+    "apps.users.apps.UsersConfig",  # Reference by class
+    "apps.posts",
+    "notifications_v2",
+    "apps.follower",  # Reference by class
 ]
+
+
 AUTH_USER_MODEL = 'users.CustomUser'
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -40,6 +39,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware"
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -104,7 +105,19 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True

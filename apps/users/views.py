@@ -2,9 +2,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
-from apps.users.serializers.serializers import UserSerializer, ProfileSerializer
 from .models import Profile
 from django.contrib.auth import get_user_model
+
+from ..serializers.serializers import UserSerializer, ProfileSerializer
 
 User = get_user_model()
 
